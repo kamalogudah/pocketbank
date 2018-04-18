@@ -5,6 +5,10 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     @accounts = Account.all
+    respond_to do |format|
+      format.html
+      format.json { render :json => @accounts }
+    end
   end
 
   # GET /accounts/1
@@ -19,6 +23,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
+    
   end
 
   # POST /accounts

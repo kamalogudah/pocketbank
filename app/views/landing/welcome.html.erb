@@ -1,2 +1,140 @@
-<h1>Landing#welcome</h1>
-<p>Find me in app/views/landing/welcome.html.erb</p>
+<!-- Page Content -->
+    <div class="container">
+      
+     <% unless user_signed_in? %>
+     <div id="app1"><h1 class="my-4"> {{ message }}</h1></div>
+      <!-- Features Section -->
+      <div class="row">
+        <div class="col-lg-6">
+          <h2>Welcome to PocketBank LLC.</h2>
+          <p>PocketBank allows you to send money to your friends conveniently, it has the following features:</p>
+          <ul>
+            <li>
+              <strong>Easy to Register</strong>
+            </li>
+            <li>Easy to Use</li>
+            <li> Alwways available</li>
+          </ul>
+            </div>
+        <div class="col-lg-6">
+          <%= image_tag 'mobile-money.jpg', :class => 'img-fluid rounded', :alt => '' %>
+        </div>
+      </div>
+      <!-- /.row -->
+      <% end %>
+      
+         <% if user_signed_in? %>
+      <!-- Features Section -->
+      <div class="row">
+        <div class="col-lg-6">
+          <h2>Hi <%= current_user.email %> </h2>
+          <p>How are you doing today</p>
+          </div>
+        <div class="col-lg-6">
+          <%= image_tag 'mobile-money.jpg', :class => 'img-fluid rounded', :alt => '' %>
+        </div>
+      </div>
+      <!-- /.row -->
+       <% end %>
+      <hr>
+      <% if user_signed_in? %>
+      <!-- Call to Action Section -->
+     
+       <div class="jumbotron">
+  <h1 class="display-4"> Send Payment!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <a class="btn btn-lg btn-success btn-block" href="#">Send Money</a>
+</div>
+ 
+      <% end %>
+
+    </div>
+      <% if user_signed_in? %>
+      <!-- Marketing Icons Section -->
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100">
+            <h4 class="card-header">Transactions</h4>
+            <div class="card-body">
+              <p class="card-text">View all your transactions that you have done .</p>
+            </div>
+            <div class="card-footer">
+              <a href='/transactions' class="btn btn-primary">View Transactions</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100">
+            <h4 class="card-header">Account</h4>
+            <div class="card-body">
+              <p class="card-text"> Check and Edit your Account details.</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary">Account Details</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100">
+            <h4 class="card-header">Delete Account</h4>
+            <div class="card-body">
+              <p class="card-text"> Unhappy?.</p>
+            </div>
+            <div class="card-footer">
+              
+              <%= button_to "Delete", account_path(current_user.accounts.first), :class => 'btn btn-danger', data: { confirm: "Are you sure you want to delete your Account?" }, method: :delete %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+     <% end %>
+     <% unless user_signed_in? %>
+      <!-- Portfolio Section -->
+      <h2> Why PocketBank </h2>
+
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            
+            <%= image_tag 'start.jpg', :class => 'card-img-top', :alt => '' %>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Getting Started</a>
+              </h4>
+              <p class="card-text"> Getting Started with PocketBank is easy just click the <strong> Sign Up </strong> button below and you are ready to start using PocketBank </p>
+               <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            
+             <%= image_tag 'Secure.png', :class => 'card-img-top', :alt => '' %>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Convenient & Secure</a>
+              </h4>
+              <p class="card-text"> PocketBank can be used conveniently at any place at any time, without fear of your security being compromised.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <%= image_tag 'available.png', :class => 'card-img-top', :alt => '' %>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Available</a>
+              </h4>
+              <p class="card-text"> PocketBank is always available 24/7 all through the year to help you meet all your financial needs!</p>
+            </div>
+          </div>
+        </div>
+       
+       <% end %>
+      <!-- /.row -->
+
+      
+    <!-- /.container -->

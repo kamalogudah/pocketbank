@@ -21,11 +21,21 @@ class TransactionsController < ApplicationController
   def edit
   end
 
-  # POST /transactions
-  # POST /transactions.json
   def create
+   
+    @recipient = User.find_by(email: email)
+    @account = User.find(params[:user_id]).accounts.first
+    @amount = params[:amount]
     @transaction = Transaction.new(transaction_params)
-
+    @transaction.transfer(@account, @recipient, @amount)
+    account_transt = account_transaction(@recipient)
+    account_tran.transact!
+    if account_tran.valid?
+      redirect_to "/merge_success?customer_id=#{customer_id}"
+    else
+      flash[:error] = 'Sorry the Transaction could not go through.'
+    end
+    
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
@@ -61,7 +71,18 @@ class TransactionsController < ApplicationController
     end
   end
 
+  
+
   private
+
+  def account_transaction(recipient)
+    @prospect_conversion ||= DoTransaction.new(
+      current_user,
+      customer_id,
+      prospect_id,
+      recipient
+    )
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
       @transaction = Transaction.find(params[:id])
