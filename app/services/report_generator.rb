@@ -1,8 +1,8 @@
 require 'prawn'
 class ReportGenerator
   include Prawn::View
-  def initialize(current_user)
-    @name = current_user
+  def initialize(users)
+    @name = users
   end
 
   def title
@@ -16,7 +16,3 @@ class ReportGenerator
   end
 
 end
-greeter = Greeter.new("Gregory")
-greeter.say_hello
-greeter.say_goodbye
-greeter.save_as("greetings.pdf")
