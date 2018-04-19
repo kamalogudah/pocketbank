@@ -6,8 +6,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-     <%= javascript_pack_tag 'hello_vue' %> 
-     <%= javascript_pack_tag 'account' %> 
+     <%= javascript_pack_tag 'hello_vue' %>
+     <%= javascript_pack_tag 'account' %>
   </head>
 <body width="90%" height="90%">
 <div class="container">
@@ -21,7 +21,6 @@
   </div>
 
 <div class="container">
-  
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -37,8 +36,6 @@
             <li class="nav-item">
               <a class="nav-link" href='/'>Services</a>
             </li>
-           
-
             <li class="navbar-text pull-right">
              <% if user_signed_in? %>
               Hi <strong><%= current_user.email %></strong>.
