@@ -19,6 +19,7 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   def new
     @account = Account.new
+    
   end
 
   # GET /accounts/1/edit
@@ -26,11 +27,9 @@ class AccountsController < ApplicationController
     
   end
 
-  # POST /accounts
-  # POST /accounts.json
   def create
     @account = Account.new(account_params)
-
+  
     respond_to do |format|
       if @account.save
         format.html { redirect_to @account, notice: 'Account was successfully created.' }

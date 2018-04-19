@@ -15,27 +15,23 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   # GET /transactions/1/edit
   def edit
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def create
-   
-    @recipient = User.find_by(email: email)
-    @account = User.find(params[:user_id]).accounts.first
-    @amount = params[:amount]
     @transaction = Transaction.new(transaction_params)
-    @transaction.transfer(@account, @recipient, @amount)
-    account_transt = account_transaction(@recipient)
-    account_tran.transact!
-    if account_tran.valid?
-      redirect_to "/merge_success?customer_id=#{customer_id}"
-    else
-      flash[:error] = 'Sorry the Transaction could not go through.'
-    end
+    account = current_user.account
+    amount = @transaction.amount
     
+    recipient = @transaction.recipient
+    DoTransaction.new(account, amount, recipient).transfer
+    
+    @transaction.category_id = params[:category_id]
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
@@ -50,6 +46,7 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json
   def update
+    @transaction.category_id = params[:category_id]
     respond_to do |format|
       if @transaction.update(transaction_params)
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
@@ -70,18 +67,16 @@ class TransactionsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  
+ 
 
   private
 
-  def account_transaction(recipient)
-    @prospect_conversion ||= DoTransaction.new(
-      current_user,
-      customer_id,
-      prospect_id,
-      recipient
-    )
+  def account_transaction(account, amount, recipient)
+    @account_transaction ||= DoTransaction.new(
+      account,
+      amount,
+      recipient)
+    @account_transaction.transfer
   end
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
@@ -90,6 +85,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:date, :amount, :from, :to, :user_id, :report_id, :account_id)
+      params.require(:transaction).permit(:date, :amount, :from, :to, :user_id, :account_id, :recipient)
     end
 end
