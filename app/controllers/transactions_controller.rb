@@ -28,10 +28,14 @@ class TransactionsController < ApplicationController
     account = current_user.account
     amount = @transaction.amount
     recipient = @transaction.recipient
+    @user_recipient = User.find_by(email: recipient)
     DoTransaction.new(account, amount, recipient).transfer
     @transaction.category_id = params[:category_id]
+    binding.pry
     respond_to do |format|
       if @transaction.save
+        UserMailer.received_money(@user_recipient).deliver_now
+        flash[:info] = "Please check your email to activate your account."
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
       else
