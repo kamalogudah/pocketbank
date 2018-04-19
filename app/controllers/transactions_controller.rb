@@ -27,10 +27,8 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     account = current_user.account
     amount = @transaction.amount
-    
     recipient = @transaction.recipient
     DoTransaction.new(account, amount, recipient).transfer
-    
     @transaction.category_id = params[:category_id]
     respond_to do |format|
       if @transaction.save
