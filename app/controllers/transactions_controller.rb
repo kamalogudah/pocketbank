@@ -26,15 +26,15 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     account = current_user.account
-    amount = @transaction.amount
+    @amount = @transaction.amount
     recipient = @transaction.recipient
     @user_recipient = User.find_by(email: recipient)
-    DoTransaction.new(account, amount, recipient).transfer
+    DoTransaction.new(account, @amount, recipient).transfer
     @transaction.category_id = params[:category_id]
-    binding.pry
     respond_to do |format|
       if @transaction.save
-        UserMailer.received_money(@user_recipient).deliver_now
+        UserMailer.received_money(current_user, @user_recipient, @amount).deliver_now
+        UserMailer.sent_money(current_user, @user_recipient, @amount).deliver_now
         flash[:info] = "Please check your email to activate your account."
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
@@ -73,13 +73,6 @@ class TransactionsController < ApplicationController
 
   private
 
-  def account_transaction(account, amount, recipient)
-    @account_transaction ||= DoTransaction.new(
-      account,
-      amount,
-      recipient)
-    @account_transaction.transfer
-  end
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
       @transaction = Transaction.find(params[:id])
