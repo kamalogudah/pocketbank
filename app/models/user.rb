@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :transactions
   has_many :reports
   has_one :account
-  before_create :build_default_account
+  after_create :build_default_account
 
   def build_default_account
     build_account
