@@ -25,12 +25,13 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = Transaction.new(transaction_params)
-    account = current_user.account
+    @transaction.category_id = params[:category_id]
+    @account = current_user.account
     @amount = @transaction.amount
     recipient = @transaction.recipient
     @user_recipient = User.find_by(email: recipient)
-    DoTransaction.new(account, @amount, recipient).transfer
-    @transaction.category_id = params[:category_id]
+    DoTransaction.new(@account, @amount, recipient).transfer
+    
     respond_to do |format|
       if @transaction.save
         UserMailer.received_money(current_user, @user_recipient, @amount).deliver_now

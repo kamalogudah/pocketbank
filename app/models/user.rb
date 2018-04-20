@@ -9,7 +9,7 @@ class User < ApplicationRecord
   after_create :build_default_account
 
   def build_default_account
-    build_account
+    build_account(balance: 1000)
     true
   end
 end
