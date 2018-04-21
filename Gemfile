@@ -16,6 +16,10 @@ gem 'bootstrap', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'prawn'
 gem 'rails_admin', '~> 1.3'
+gem 'rails_admin_rollincode', '~> 1.0'
+gem 'rails_admin_charts'
+gem 'cancancan'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
