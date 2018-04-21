@@ -24,7 +24,7 @@ class TransactionsController < ApplicationController
     recipient = @transaction.recipient
     @user_recipient = User.find_by(email: recipient)
     DoTransaction.new(@account, @amount, recipient).transfer
-    # @transaction.category.id = params[:category_id]
+    @transaction.category_id = params[:category_id]
     @transaction.user_id = current_user.id
     @transaction.account_id = current_user.account.id
       respond_to do |format|
