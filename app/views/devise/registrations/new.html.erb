@@ -1,36 +1,30 @@
-<div align="center">
-  <div class="col-lg-4 mb-4">
-    <div class="card h-100">
-      <h4 class="card-header">Sign Up</h4>
-        <div class="card-body">
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= devise_error_messages! %>
-          <div class="form-field">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email",  :placeholder =>"Email address" %> <br/>
+
+<h2>Sign Up</h2>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= devise_error_messages! %>
+<div class="form-group col-md-6">
+<%= f.label :email %>
+<%= f.email_field :email, autofocus: true,:class => "form-control", autocomplete: "email",  :placeholder =>"Email address" %> <br/>
+</div>
+<div class="form-group col-md-6">
+          <%= f.label :phone_number %>
+            <%= f.text_field :phone_number, autofocus: true,:class => "form-control", autocomplete: "email",  :placeholder =>"254722000000" %> <br/>
           </div>
-          <br/>
-          <div class="form-field">
-            <%= f.password_field :password, autocomplete: "off",  :placeholder => "Password" %> <br/>
-            <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
-          </div>
-          <br/>
-           <div class="form-field">
-            <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Password Confirmation"%>
+          <div class="form-group col-md-6">
+             <%= f.label :password %><br/>
+            <%= f.password_field :password,:class => "form-control", autocomplete: "off",  :placeholder => "Password" %> <br/>
+                     </div>
+               <div class="form-group col-md-6">
+            <%= f.label :password_confirmation %><br/>
+            <%= f.password_field :password_confirmation, :class => "form-control", autocomplete: "off", :placeholder => "Password Confirmation"%>
            </div>
-            </div>
-            <div class="card-footer">
-              <div class="actions">
-                 <%= f.submit "Sign up", :class => 'btn btn-primary' %>
+               <div class="form-group col-md-6">
+                 <%= f.submit "Sign up", :class => 'btn btn-primary form-control' %>
               </div>
               <% end %>
+                 <div class="form-group col-md-6">
               <%= render "devise/shared/links" %>
-            </div>
-          </div>
-        </div>
-      </div>
-   </div>
- </div>
+              </div>
+
 
 

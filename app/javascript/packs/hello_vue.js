@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
   var app = new Vue({
     el: '#app',
     data: {
-   
       title: "PocketBank LLC"
     }
   })

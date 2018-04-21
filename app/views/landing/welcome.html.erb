@@ -1,12 +1,10 @@
 <!-- Page Content -->
     <div class="container">
-      
-     <% unless user_signed_in? %>
+       <% unless user_signed_in? %>
      <div id="app1"><h1 class="my-4"> {{ message }}</h1></div>
       <!-- Features Section -->
       <div class="row">
         <div class="col-lg-6">
-          <h2>Welcome to PocketBank LLC.</h2>
           <p>PocketBank allows you to send money to your friends conveniently, it has the following features:</p>
           <ul>
             <li>
@@ -16,7 +14,7 @@
             <li> Alwways available</li>
           </ul>
             </div>
-        <div class="col-lg-6">
+           <div class="col-lg-6">
           <%= image_tag 'mobile-money.jpg', :class => 'img-fluid rounded', :alt => '' %>
         </div>
       </div>
@@ -41,9 +39,8 @@
        <div class="jumbotron">
         <h1 class="display-4"> Send Payment!</h1>
          <p class="lead"></p>
-    <p></p>
-  <a class="btn btn-lg btn-success btn-block" href="/transactions/new">Send Money</a>
-</div>
+      <a class="btn btn-lg btn-success btn-block" href="/transactions/new">Send Money</a>
+     </div>
    <% end %>
 
     </div>
@@ -68,7 +65,8 @@
               <p class="card-text"> Check and Edit your Account details.</p>
             </div>
             <div class="card-footer">
-              <%= link_to 'Account Details', edit_account_path(current_user.account), :class => 'btn btn-primary' %>
+              <%= link_to 'Account Details', account_path(current_user.account), :class => 'btn btn-primary' %>
+            
             </div>
           </div>
         </div>

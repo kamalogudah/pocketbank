@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/back_office', as: 'rails_admin'
   resources :categories
   resources :accounts
   resources :transactions
-  resources :reports
   get 'landing/welcome'
   root 'landing#welcome'
   get 'landing/about'

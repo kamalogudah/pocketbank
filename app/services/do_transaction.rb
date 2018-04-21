@@ -9,10 +9,8 @@ class DoTransaction
 
   def transfer
     return false unless amount_valid?(amount)
-    
-      withdraw(account, amount)
+        withdraw(account, amount)
       deposit(recipient_account, amount)
-    
   end
 
   private
@@ -42,7 +40,7 @@ class DoTransaction
   def recipient_account
     User.find_by(email: recipient).account
   end
-  
+
   def amount_valid?(amount)
     if amount <= 0
       puts 'Transaction failed! Amount must be greater than 0.00'

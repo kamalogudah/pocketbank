@@ -1,19 +1,25 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Number:</strong>
-  <%= @account.number %>
-</p>
-
-<p>
-  <strong>Balance:</strong>
-  <%= @account.balance %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @account.user.email %>
-</p>
-
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<h1> Your Account Details</h1>
+<div class="card border-success mb-3" style="max-width: 30rem;">
+  <div class="card-header bg-transparent border-success">Your Account Details</div>
+  <div class="card-body text-success">
+    <div class="card-title">
+      <strong>Number: </strong>
+       <%= @account.number %>
+     
+    </div>
+      <div class="card-title">
+      <strong>Balance:</strong>
+      <%= @account.balance %>
+    </div>
+    <div class="card-title">
+      <strong>User:</strong>
+      <%= @account.user.email %>
+    </div>
+   
+  </div>
+  <div class="card-footer bg-transparent border-success">
+   <strong>Date Created:</strong>
+  <%= @account.created_at %>
+  </div>
+</div>
