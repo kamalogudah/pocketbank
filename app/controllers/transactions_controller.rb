@@ -5,6 +5,10 @@ class TransactionsController < ApplicationController
     @transactions = current_user.transactions
   end
 
+  def pdf
+    @transactions = current_user.transactions
+  end
+
   def show
   end
 

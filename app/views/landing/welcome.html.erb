@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col-lg-6">
           <h2>Hi <%= current_user.email %> </h2>
-          <p>How are you doing today</p>
+            <p>How are you doing today  <% if current_user.try(:admin?) %> Admin </p>   <% end%>
           </div>
         <div class="col-lg-6">
           <%= image_tag 'mobile-money.jpg', :class => 'img-fluid rounded', :alt => '' %>
@@ -34,7 +34,7 @@
       <!-- /.row -->
        <% end %>
       <hr>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && !current_user.try(:admin?) %>
       <!-- Call to Action Section -->
        <div class="jumbotron">
         <h1 class="display-4"> Send Payment!</h1>
@@ -44,7 +44,7 @@
    <% end %>
 
     </div>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && !current_user.try(:admin?) %>
       <!-- Marketing Icons Section -->
       <div class="row">
         <div class="col-lg-4 mb-4">

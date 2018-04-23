@@ -8,10 +8,12 @@
        <%= @account.number %>
      
     </div>
+    <% if user_signed_in? && !current_user.try(:admin?) %>
       <div class="card-title">
       <strong>Balance:</strong>
       <%= @account.balance %>
     </div>
+    <% end%>
     <div class="card-title">
       <strong>User:</strong>
       <%= @account.user.email %>

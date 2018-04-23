@@ -29,14 +29,27 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+            <% if current_user.try(:admin?) %>
+              <a class="btn btn-sm btn-outline-success" href='/back_office'>Back Office</a>
+                <% end %>
+            </li>
+            &nbsp
+              <li class="nav-item">
+            <% if user_signed_in?   %>
+             
+               <%= link_to 'Account Details', account_path(current_user.account), :class => 'btn btn-sm btn-outline-success' %>
+                <% end %>
+            </li>
+            &nbsp
             <li class="nav-item">
-            <% if user_signed_in? %>
+            <% if user_signed_in? && !current_user.try(:admin?) %>
               <a class="btn btn-sm btn-outline-success" href="/transactions">Your Transactions</a>
                 <% end %>
             </li>
             &nbsp
             <li class="nav-item">
-            <% if user_signed_in? %>
+            <% if user_signed_in? && !current_user.try(:admin?) %>
               <a class="btn btn-sm btn-outline-success" href="/transactions/new">Send Money</a>
                 <% end %>
             </li>
